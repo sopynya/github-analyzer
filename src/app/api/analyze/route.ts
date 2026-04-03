@@ -2,7 +2,6 @@
 import { getAllFiles, parseGitHubUrl, getFileScore, isPublicRepo, isValidGitHubUrl } from "@/lib/github"
 import { getFilesContent } from "@/lib/files"
 import { analyzeWithRetry } from "@/lib/ai-safe"
-import { testAI } from "@/lib/ai"
 
 
 export async function POST(req: Request) {

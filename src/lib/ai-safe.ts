@@ -19,29 +19,18 @@ ${broken}
 }
 
 export async function analyzeWithRetry(code: string) {
-
   let response = await analyzeCode(code)
+
+  if (!response) throw new Error("AI_EMPTY")
+
   let parsed = safeParseAI(response)
 
   if (parsed) return parsed
 
-  response = await repairJSON(response)
-  parsed = safeParseAI(response)
+  const repaired = await repairJSON(response)
+  const parsedRepair = safeParseAI(repaired)
 
-  if (parsed) return parsed
+  if (parsedRepair) return parsedRepair
 
-  response = await analyzeCode(code)
-  parsed = safeParseAI(response)
-
-  if (parsed) return parsed
-
-  return {
-    generalScore: 5,
-    performanceScore: 5,
-    securityRate: 5,
-    securityIssues: ["Failed to analyze"],
-    performanceIssues: [],
-    generalIssues: [],
-    suggestions: ["Try again later"]
-  }
+  throw new Error("AI_INVALID")
 }

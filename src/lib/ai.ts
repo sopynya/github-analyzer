@@ -97,7 +97,7 @@ ${code}
       },
     })
 
-    return res.text
+    return res.text ?? ""
 
   } catch (err: any) {
     console.error("GEMINI ERROR:", err)
@@ -123,7 +123,7 @@ export async function callGemini(prompt: string) {
       },
     })
 
-    return res.text
+    return res.text ?? ""
 
   } catch (err: any) {
     console.error("🔥 GEMINI CALL ERROR:", err)
@@ -137,12 +137,4 @@ export async function callGemini(prompt: string) {
 
     throw new Error(err.message || "AI_ERROR")
   }
-}
-export async function testAI() {
-  const res = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
-    contents: "Say hello"
-  })
-
-  console.log(res.text)
 }

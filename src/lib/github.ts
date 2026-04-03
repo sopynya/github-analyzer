@@ -51,7 +51,6 @@ export async function getAllFiles(
     }
   }
   )
-  console.log("STATUS:", res.status)
   if (!res.ok) {
     console.error("GitHub API error")
     return collected
@@ -64,7 +63,6 @@ if (res.status === 403) {
   throw new Error("GitHub rate limit exceeded")
 }
   const data = await res.json()
-console.log("DATA:", data)
   for (const item of data) {
     if (collected.length >= MAX_FILES) break
     if (
