@@ -1,15 +1,4 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 html {
   height: 100%;
 }
@@ -24,11 +13,11 @@ body {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Quantico', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(to bottom, rgb(13, 0, 16), rgb(63, 32, 69));
+  background-attachment: fixed;
 }
 
 * {
@@ -42,8 +31,88 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  height: 100%;
+}
+
+.loader-ring {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: relative;
+
+  background: conic-gradient(
+    from 0deg,
+    #c655f7,
+    #ae3aed,
+    #7d1d95,
+    #c455f7
+  );
+
+  animation: spin 1.2s linear infinite;
+
+  /* glow */
+  box-shadow:
+    0 0 20px rgba(207, 85, 247, 0.6),
+    0 0 40px rgba(183, 58, 237, 0.5);
+}
+
+/* centro (buraco) */
+.loader-ring::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  background: rgb(36, 3, 46); /* fundo escuro */
+  border-radius: 50%;
+}
+
+/* animação */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* texto */
+.loader-text {
+  color: #d484fc;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-align: center;
+
+  text-shadow:
+    0 0 6px rgba(204, 85, 247, 0.8),
+    0 0 12px rgba(183, 58, 237, 0.6);
+
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.loader-ring::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 2px dashed rgba(168, 85, 247, 0.4);
+
+  animation: spinReverse 3s linear infinite;
+}
+
+@keyframes spinReverse {
+  to {
+    transform: rotate(-360deg);
   }
 }
