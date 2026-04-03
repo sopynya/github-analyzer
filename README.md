@@ -28,7 +28,6 @@ The analyzer evaluates:
 - Consistency
 
 Each category receives a score from 0 to 10, along with actionable insights.
----
 
 ## How it works
 
